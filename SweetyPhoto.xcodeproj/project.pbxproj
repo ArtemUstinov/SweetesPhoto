@@ -9,23 +9,29 @@
 /* Begin PBXBuildFile section */
 		AC0579CB25446D4E00798F91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0579CA25446D4E00798F91 /* AppDelegate.swift */; };
 		AC0579CD25446D4E00798F91 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0579CC25446D4E00798F91 /* SceneDelegate.swift */; };
-		AC0579CF25446D4E00798F91 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0579CE25446D4E00798F91 /* ViewController.swift */; };
 		AC0579D225446D4E00798F91 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC0579D025446D4E00798F91 /* Main.storyboard */; };
 		AC0579D525446D4E00798F91 /* SweetyPhoto.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AC0579D325446D4E00798F91 /* SweetyPhoto.xcdatamodeld */; };
 		AC0579D725446D5100798F91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC0579D625446D5100798F91 /* Assets.xcassets */; };
 		AC0579DA25446D5100798F91 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC0579D825446D5100798F91 /* LaunchScreen.storyboard */; };
+		AC0579E225446DB400798F91 /* PhotosCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0579E125446DB400798F91 /* PhotosCollectionViewController.swift */; };
+		AC0579E42544732200798F91 /* CurrentPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0579E32544732200798F91 /* CurrentPhotosViewController.swift */; };
+		AC0579E62544736300798F91 /* SavedPhotosCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0579E52544736300798F91 /* SavedPhotosCollectionViewController.swift */; };
+		AC0579E82544749A00798F91 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0579E72544749A00798F91 /* PhotoCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		AC0579C725446D4E00798F91 /* SweetyPhoto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SweetyPhoto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC0579CA25446D4E00798F91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC0579CC25446D4E00798F91 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		AC0579CE25446D4E00798F91 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		AC0579D125446D4E00798F91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AC0579D425446D4E00798F91 /* SweetyPhoto.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SweetyPhoto.xcdatamodel; sourceTree = "<group>"; };
 		AC0579D625446D5100798F91 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AC0579D925446D5100798F91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AC0579DB25446D5100798F91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AC0579E125446DB400798F91 /* PhotosCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewController.swift; sourceTree = "<group>"; };
+		AC0579E32544732200798F91 /* CurrentPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentPhotosViewController.swift; sourceTree = "<group>"; };
+		AC0579E52544736300798F91 /* SavedPhotosCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPhotosCollectionViewController.swift; sourceTree = "<group>"; };
+		AC0579E72544749A00798F91 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +66,10 @@
 			children = (
 				AC0579CA25446D4E00798F91 /* AppDelegate.swift */,
 				AC0579CC25446D4E00798F91 /* SceneDelegate.swift */,
-				AC0579CE25446D4E00798F91 /* ViewController.swift */,
+				AC0579E125446DB400798F91 /* PhotosCollectionViewController.swift */,
+				AC0579E32544732200798F91 /* CurrentPhotosViewController.swift */,
+				AC0579E52544736300798F91 /* SavedPhotosCollectionViewController.swift */,
+				AC0579E72544749A00798F91 /* PhotoCell.swift */,
 				AC0579D025446D4E00798F91 /* Main.storyboard */,
 				AC0579D625446D5100798F91 /* Assets.xcassets */,
 				AC0579D825446D5100798F91 /* LaunchScreen.storyboard */,
@@ -141,10 +150,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC0579CF25446D4E00798F91 /* ViewController.swift in Sources */,
+				AC0579E82544749A00798F91 /* PhotoCell.swift in Sources */,
+				AC0579E42544732200798F91 /* CurrentPhotosViewController.swift in Sources */,
 				AC0579CB25446D4E00798F91 /* AppDelegate.swift in Sources */,
 				AC0579CD25446D4E00798F91 /* SceneDelegate.swift in Sources */,
+				AC0579E225446DB400798F91 /* PhotosCollectionViewController.swift in Sources */,
 				AC0579D525446D4E00798F91 /* SweetyPhoto.xcdatamodeld in Sources */,
+				AC0579E62544736300798F91 /* SavedPhotosCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,7 +309,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ArtemUstinov.SweetyPhoto;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -314,7 +326,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ArtemUstinov.SweetyPhoto;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
