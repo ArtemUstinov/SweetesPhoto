@@ -8,18 +8,23 @@
 
 import UIKit
 
+
 class CurrentPhotosViewController: UIViewController {
     
     @IBOutlet weak var currentLabel: UILabel!
     @IBOutlet weak var currentImage: UIImageView!
     
+    var currentItems = [PhotoData]()
     
     var image: UIImage?
+    var text: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         currentImage.image = image
+        currentLabel.text = text
     }
     
     deinit {

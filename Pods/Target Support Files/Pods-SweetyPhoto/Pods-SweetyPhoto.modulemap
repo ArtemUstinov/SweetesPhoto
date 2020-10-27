@@ -1,0 +1,6 @@
+framework module Pods_SweetyPhoto {
+  umbrella header "Pods-SweetyPhoto-umbrella.h"
+
+  export *
+  module * { export * }
+}
