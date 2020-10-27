@@ -38,14 +38,14 @@ class PhotosCollectionViewController: UICollectionViewController {
         //            print(self.modelOfPhoto)
         //            self.collectionView.reloadData()
         
-        //        let request = AF.request("https://jsonplaceholder.typicode.com/photos")
-        //        request.validate()
-        //        request.responseDecodable(of: [ModelOfPhoto].self) { (response) in
-        //            guard let photo = response.value else { return }
-        //            self.modelOfPhoto = photo
-        //            print(self.modelOfPhoto)
-        //            self.collectionView.reloadData()
-        //        }
+//                let request = AF.request("https://jsonplaceholder.typicode.com/photos")
+//                request.validate()
+//                request.responseDecodable(of: [ModelOfPhoto].self) { (response) in
+//                    guard let photo = response.value else { return }
+//                    self.modelOfPhoto = photo
+//                    print(self.modelOfPhoto)
+//                    self.collectionView.reloadData()
+//                }
         
         savedPhotosCollVC.photosCollVC = self
         
@@ -83,7 +83,7 @@ class PhotosCollectionViewController: UICollectionViewController {
         do {
             try context.save()
             dataPhoto.photoData.append(object)
-            print("Oooooooooooooooooooooooooooooo")
+            print("Ooooooooooooooooooooooooooooooooo")
         } catch let error as NSError {
             print(error.localizedDescription)
         }
