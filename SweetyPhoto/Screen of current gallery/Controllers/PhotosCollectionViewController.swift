@@ -44,143 +44,143 @@ class PhotosCollectionViewController: UICollectionViewController {
     
     
     func saveUrl(withTitle title: String, withUrl url: Data, int: Int64, completion: (Bool) -> Void) {
-
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            let context = appDelegate.persistentContainer.viewContext
-
-            guard let entity = NSEntityDescription.entity(forEntityName: "Photo",
-                                                          in: context)
-                else { return }
-
-            let object = Photo(entity: entity, insertInto: context)
-            //        object.url = url
-            object.title = title
-            object.url = url
-            object.id = int
         
-            
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Photo")
-//                   var resultsArr:[Photo] = []
-                   do {
-//                    if dataPhoto.dataPhoto.count > 0 {
-                        for x in dataPhoto.dataPhoto {
-                       if x.url == url {
-                        print("already exist \(x.url!)")
-                        completion(true)
-                        context.delete(x)
-                       } else {
-                        print("ADDDDDDDDD")
-//                        dataPhoto.dataPhoto.append(x)
-                            }
-                      }
-                        print("END CYCLE")
-//                    }
-                    dataPhoto.dataPhoto = try context.fetch(fetchRequest) as! [Photo]
-                    try context.save()
-                   } catch {
-                       let fetchError = error as NSError
-                       print(fetchError)
-                   }
-
-//            if resultsArr.count > 0 {
-//             for x in resultsArr {
-//               if x.title == title {
-//                     print("already exist")
-//                     context.delete(x)
-//               } else {
-//                 }
-//              }
-
-//            do {
-//                try context.save()
-//                dataPhoto.dataPhoto.append(object)
-//                print("Ooooooooooooooooooooooooooooooooo")
-//            } catch let error as NSError {
-//                print(error.localizedDescription)
-//            }
-//        }
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        guard let entity = NSEntityDescription.entity(forEntityName: "Photo",
+                                                      in: context)
+            else { return }
+        
+        let object = Photo(entity: entity, insertInto: context)
+        //        object.url = url
+        object.title = title
+        object.url = url
+        object.id = int
+        
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Photo")
+        //                   var resultsArr:[Photo] = []
+        do {
+            //                    if dataPhoto.dataPhoto.count > 0 {
+            for x in dataPhoto.dataPhoto {
+                if x.url == url {
+                    print("already exist \(x.url!)")
+                    completion(true)
+                    context.delete(x)
+                } else {
+                    print("ADDDDDDDDD")
+                    //                        dataPhoto.dataPhoto.append(x)
+                }
+            }
+            print("END CYCLE")
+            //                    }
+            dataPhoto.dataPhoto = try context.fetch(fetchRequest) as! [Photo]
+            try context.save()
+        } catch {
+            let fetchError = error as NSError
+            print(fetchError)
+        }
+        
+        //            if resultsArr.count > 0 {
+        //             for x in resultsArr {
+        //               if x.title == title {
+        //                     print("already exist")
+        //                     context.delete(x)
+        //               } else {
+        //                 }
+        //              }
+        
+        //            do {
+        //                try context.save()
+        //                dataPhoto.dataPhoto.append(object)
+        //                print("Ooooooooooooooooooooooooooooooooo")
+        //            } catch let error as NSError {
+        //                print(error.localizedDescription)
+        //            }
+        //        }
     }
-//
-//    func saveUrl(withTitle title: String, withUrl url: Data) {
-//
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        let context = appDelegate.persistentContainer.viewContext
-//
-//        guard let entity = NSEntityDescription.entity(forEntityName: "Photo",
-//                                                      in: context) else { return }
-//
-//        let object = Photo(entity: entity, insertInto: context)
-//        object.title = title
-//        object.url = url
-//
-//
-//        var selection: [String] = []
-//        let request = NSFetchRequest<NSManagedObject>(entityName: "Photo")
-//        request.returnsObjectsAsFaults = false
-//
-//        let predicate = NSPredicate(format: "title == %@", title)
-//        request.predicate = predicate
-//
-//        do {
-//            let result = try context.fetch(request)
-//            for data in result as! [Photo] {
-//                guard let object = data.value(forKey: "title") as? String else {
-////                    context.delete(data) // or however you want to handle this situation
-//                    continue
-//                }
-////                let predicate = NSPredicate(format: "url == %@", url as CVarArg)
-////                request.predicate = predicate
-//                selection.contains(object) ? context.delete(data) : selection.append(object)
-//            }
-//            print("SAVAVSVSVSVSVSVSVSV")
-//            try context.save()
-//        } catch {
-//            print("Failed")
-//        }
-////        return selection
-//    }
+    //
+    //    func saveUrl(withTitle title: String, withUrl url: Data) {
+    //
+    //        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    //        let context = appDelegate.persistentContainer.viewContext
+    //
+    //        guard let entity = NSEntityDescription.entity(forEntityName: "Photo",
+    //                                                      in: context) else { return }
+    //
+    //        let object = Photo(entity: entity, insertInto: context)
+    //        object.title = title
+    //        object.url = url
+    //
+    //
+    //        var selection: [String] = []
+    //        let request = NSFetchRequest<NSManagedObject>(entityName: "Photo")
+    //        request.returnsObjectsAsFaults = false
+    //
+    //        let predicate = NSPredicate(format: "title == %@", title)
+    //        request.predicate = predicate
+    //
+    //        do {
+    //            let result = try context.fetch(request)
+    //            for data in result as! [Photo] {
+    //                guard let object = data.value(forKey: "title") as? String else {
+    ////                    context.delete(data) // or however you want to handle this situation
+    //                    continue
+    //                }
+    ////                let predicate = NSPredicate(format: "url == %@", url as CVarArg)
+    ////                request.predicate = predicate
+    //                selection.contains(object) ? context.delete(data) : selection.append(object)
+    //            }
+    //            print("SAVAVSVSVSVSVSVSVSV")
+    //            try context.save()
+    //        } catch {
+    //            print("Failed")
+    //        }
+    ////        return selection
+    //    }
     
     
-
-//        func saveUrl(withTitle title: String, withUrl url: Data) {
-//
-//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//            let context = appDelegate.persistentContainer.viewContext
-//
-//            guard let entity = NSEntityDescription.entity(forEntityName: "Photo",
-//                                                          in: context) else { return }
-//
-//            let object = Photo(entity: entity, insertInto: context)
-//            object.title = title
-//            object.url = url
-//
-//
-//            var selection: [String] = []
-//            let request = NSFetchRequest<NSManagedObject>(entityName: "Photo")
-//            request.returnsObjectsAsFaults = false
-//
-//            let predicate = NSPredicate(format: "title == %@", title)
-//            request.predicate = predicate
-//
-//            do {
-//                let result = try context.fetch(request)
-//                for data in result as! [Photo] {
-//                    guard let object = data.value(forKey: "title") as? String else {
-//    //                    context.delete(data) // or however you want to handle this situation
-//                        continue
-//                    }
-//    //                let predicate = NSPredicate(format: "url == %@", url as CVarArg)
-//    //                request.predicate = predicate
-//                    selection.contains(object) ? context.delete(data) : selection.append(object)
-//                }
-//                print("SAVAVSVSVSVSVSVSVSV")
-//                try context.save()
-//            } catch {
-//                print("Failed")
-//            }
-//    //        return selection
-//
-//        }
+    
+    //        func saveUrl(withTitle title: String, withUrl url: Data) {
+    //
+    //            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    //            let context = appDelegate.persistentContainer.viewContext
+    //
+    //            guard let entity = NSEntityDescription.entity(forEntityName: "Photo",
+    //                                                          in: context) else { return }
+    //
+    //            let object = Photo(entity: entity, insertInto: context)
+    //            object.title = title
+    //            object.url = url
+    //
+    //
+    //            var selection: [String] = []
+    //            let request = NSFetchRequest<NSManagedObject>(entityName: "Photo")
+    //            request.returnsObjectsAsFaults = false
+    //
+    //            let predicate = NSPredicate(format: "title == %@", title)
+    //            request.predicate = predicate
+    //
+    //            do {
+    //                let result = try context.fetch(request)
+    //                for data in result as! [Photo] {
+    //                    guard let object = data.value(forKey: "title") as? String else {
+    //    //                    context.delete(data) // or however you want to handle this situation
+    //                        continue
+    //                    }
+    //    //                let predicate = NSPredicate(format: "url == %@", url as CVarArg)
+    //    //                request.predicate = predicate
+    //                    selection.contains(object) ? context.delete(data) : selection.append(object)
+    //                }
+    //                print("SAVAVSVSVSVSVSVSVSV")
+    //                try context.save()
+    //            } catch {
+    //                print("Failed")
+    //            }
+    //    //        return selection
+    //
+    //        }
     
     /*
      // MARK: - Navigation
@@ -212,7 +212,7 @@ class PhotosCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! PhotoCell
         
         
-                        
+        
         cell.backgroundColor = .secondarySystemBackground
         
         let item = modelOfPhoto[indexPath.item]
@@ -225,27 +225,25 @@ class PhotosCollectionViewController: UICollectionViewController {
         cell.tag = indexPath.item
         
         
-        getUrl(index: indexPath) { completion in
-            
-//            modelOfPhoto = completion
-//            for com in completion {
-            if completion[indexPath.item].title.contains(dataPhoto.dataPhoto[indexPath.item].title ?? "") {
-                    cell.checkMarkImage.isHidden = false
-                    print("TTTTAAAAAKKK")
-                } else {
-                    cell.checkMarkImage.isHidden = true
-                }
+        getUrl(index: indexPath, title: modelOfPhoto[indexPath.item].title) { completion in
+ 
+            if completion == true {
+                cell.checkMarkImage.isHidden = false
+                print("TTTTAAAAAKKK")
+            } else {
+                cell.checkMarkImage.isHidden = true
             }
+        }
         
-//        }
-//            if completion == false {
-//
-//                cell.checkMarkImage.isHidden = false
-//                print("QQQQQQQQ")
-//            } else {
-//                cell.checkMarkImage.isHidden = true
-//            }
-//        }
+        //        }
+        //            if completion == false {
+        //
+        //                cell.checkMarkImage.isHidden = false
+        //                print("QQQQQQQQ")
+        //            } else {
+        //                cell.checkMarkImage.isHidden = true
+        //            }
+        //        }
         
         return cell
         
@@ -265,7 +263,7 @@ class PhotosCollectionViewController: UICollectionViewController {
                 
                 currentPhotosVC.image = UIImage(data: data)
                 currentPhotosVC.text = cell.labelOfImage.text
-                                    
+                
                 saveUrl(withTitle: currentPhotosVC.text ?? "", withUrl: data, int: Int64(modelOfPhoto[indexPath].id)) {
                     completion in
                     
@@ -277,87 +275,75 @@ class PhotosCollectionViewController: UICollectionViewController {
                         cell.checkMarkImage.isHidden = true
                     }
                 }
-//                    cell.checkMarkImage.isHidden = false
-                    print("xxxxxxxxxx")
-                    
-//                    cell.checkMarkImage.isHidden = false
-//                    print("NNNNNNNEEEEEEEETTTTTTT")
-                    
-                }
-                
             }
-        }
-    
-    func getUrl(index: IndexPath, completion: ([ModelOfPhoto]) -> Void) {
-        
-                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                    let context = appDelegate.persistentContainer.viewContext
             
-//                    let fetchRequest = NSFetchRequest<Photo>(entityName: "Photo")
-        
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Photo")
-        
-               do {
-//                if dataPhoto.dataPhoto[index.item].title == int {
-//                for x in dataPhoto.dataPhoto {
-//                    if x.title == title {
-//                         mainManagedObjectContext.deleteObject(x)
-                completion(.init())
-                            print("CHEEEEEEEEELKKKKKK")
-//                            dataPhoto.dataPhoto = try context.fetch(fetchRequest) as! [Photo]
-//                            try context.save()
-//                        } else {
-////                            dataPhoto.dataPhoto = try context.fetch(fetchRequest) as! [Photo]
-//
-//                            completion([x])
-////                            try context.save()
-//                    }
-//                     }
-//                  }
-                dataPhoto.dataPhoto = try context.fetch(fetchRequest) as! [Photo]
-                try context.save()
-               } catch {
-                   let fetchError = error as NSError
-                   print(fetchError)
-               }
-   
         }
     }
     
-    
-    // MARK: UICollectionViewDelegate
-    
-    /*
-     // Uncomment this method to specify if the specified item should be highlighted during tracking
-     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
-    
-    /*
-     // Uncomment this method to specify if the specified item should be selected
-     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
-    
-    /*
-     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-     override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-     return false
-     }
-     
-     override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-     return false
-     }
-     
-     override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-     
-     }
-     */
+    func getUrl(index: IndexPath, title: String, completion: (Bool) -> Void) {
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        //                    let fetchRequest = NSFetchRequest<Photo>(entityName: "Photo")
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Photo")
+        
+        do {
+//            if dataPhoto.dataPhoto[index.item].title == title {
+                for x in dataPhoto.dataPhoto {
+                    if x.title == title {
+                        completion(true)
+                        print("CHEEEEEEEEELKKKKKK \(title)")
+                    } else {
+                        completion(false)
+                    }
+                }
+//            }
+            dataPhoto.dataPhoto = try context.fetch(fetchRequest) as! [Photo]
+            try context.save()
+        } catch {
+            let fetchError = error as NSError
+            print(fetchError)
+        }
+        
+    }
+}
 
 
-    
+// MARK: UICollectionViewDelegate
+
+/*
+ // Uncomment this method to specify if the specified item should be highlighted during tracking
+ override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+ return true
+ }
+ */
+
+/*
+ // Uncomment this method to specify if the specified item should be selected
+ override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+ return true
+ }
+ */
+
+/*
+ // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
+ override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
+ return false
+ }
+ 
+ override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+ return false
+ }
+ 
+ override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
+ 
+ }
+ */
+
+
+
 
 
 extension PhotosCollectionViewController: UICollectionViewDelegateFlowLayout {
