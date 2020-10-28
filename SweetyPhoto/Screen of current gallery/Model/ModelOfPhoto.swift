@@ -14,11 +14,7 @@ struct ModelOfPhoto: Codable {
     let url: String
     let thumbnailUrl: String
     
-//    var title: [String] = []
-//    var url: [String] = []
-//    var thumbnailUrl: [String] = []
-        
-    init?(photoData: PhotoData) {
+    init?(photoData: NetworkData) {
         id = photoData.id
         title = photoData.title
         url = photoData.url

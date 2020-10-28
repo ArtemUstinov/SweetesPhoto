@@ -10,84 +10,177 @@ import UIKit
 import Alamofire
 import CoreData
 
-//private let reuseIdentifier = "Cell"
-
 class PhotosCollectionViewController: UICollectionViewController {
     
-    var savedPhotosCollVC = SavedPhotosCollectionViewController()
+    //MARK: - Private properties:
     
-    var dataPhoto = DataPhoto(photoData: [Photo]())
+    var dataPhoto = DataPhoto(dataPhoto: [Photo]())
     
     let networkPhotoManager = NetworkPhotoManager()
     
-    //    var items = [PhotoData]()
     var modelOfPhoto = [ModelOfPhoto]()
     
-    var url = "https://jsonplaceholder.typicode.com/photos"
+    var photoCell = PhotoCell()
     
-    
+    //MARK: - Override methods:
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-        //        let request = AF.request("https://jsonplaceholder.typicode.com/photos")
-        //        request.validate()
-        //        request.responseDecodable(of: [PhotoData].self) { (response) in
-        //            guard let photo = response.value else { return }
-        //            self.items = photo
-        //            print(self.modelOfPhoto)
-        //            self.collectionView.reloadData()
         
-//                let request = AF.request("https://jsonplaceholder.typicode.com/photos")
-//                request.validate()
-//                request.responseDecodable(of: [ModelOfPhoto].self) { (response) in
-//                    guard let photo = response.value else { return }
-//                    self.modelOfPhoto = photo
-//                    print(self.modelOfPhoto)
-//                    self.collectionView.reloadData()
-//                }
+        networkPhotoManager.fetchPhotos { (response) in
+            self.modelOfPhoto = response
+            self.collectionView.reloadData()
+        }
         
-        savedPhotosCollVC.photosCollVC = self
-        
-//        networkPhotoManager.fetchPhotos { (response) in
-//            self.modelOfPhoto = response
-//            self.collectionView.reloadData()
-//        }
         
         //        networkPhotoManager.fetchCurrentPhotos()
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
-        // Register cell classes
-        //        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        
-        // Do any additional setup after loading the view.
     }
     
     
-    func saveUrl(withTitle title: String, withUrl url: Data) {
+    
+    func saveUrl(withTitle title: String, withUrl url: Data, int: Int64, completion: (Bool) -> Void) {
+
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let context = appDelegate.persistentContainer.viewContext
+
+            guard let entity = NSEntityDescription.entity(forEntityName: "Photo",
+                                                          in: context)
+                else { return }
+
+            let object = Photo(entity: entity, insertInto: context)
+            //        object.url = url
+            object.title = title
+            object.url = url
+            object.id = int
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        
-        guard let entity = NSEntityDescription.entity(forEntityName: "Photo",
-                                                      in: context)
-            else { return }
-        
-        let object = Photo(entity: entity, insertInto: context)
+            
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Photo")
+//                   var resultsArr:[Photo] = []
+                   do {
+//                    if dataPhoto.dataPhoto.count > 0 {
+                        for x in dataPhoto.dataPhoto {
+                       if x.url == url {
+                        print("already exist \(x.url!)")
+                        completion(true)
+                        context.delete(x)
+                       } else {
+                        print("ADDDDDDDDD")
+//                        dataPhoto.dataPhoto.append(x)
+                            }
+                      }
+                        print("END CYCLE")
+//                    }
+                    dataPhoto.dataPhoto = try context.fetch(fetchRequest) as! [Photo]
+                    try context.save()
+                   } catch {
+                       let fetchError = error as NSError
+                       print(fetchError)
+                   }
+
+//            if resultsArr.count > 0 {
+//             for x in resultsArr {
+//               if x.title == title {
+//                     print("already exist")
+//                     context.delete(x)
+//               } else {
+//                 }
+//              }
+
+//            do {
+//                try context.save()
+//                dataPhoto.dataPhoto.append(object)
+//                print("Ooooooooooooooooooooooooooooooooo")
+//            } catch let error as NSError {
+//                print(error.localizedDescription)
+//            }
+//        }
+    }
+//
+//    func saveUrl(withTitle title: String, withUrl url: Data) {
+//
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//        let context = appDelegate.persistentContainer.viewContext
+//
+//        guard let entity = NSEntityDescription.entity(forEntityName: "Photo",
+//                                                      in: context) else { return }
+//
+//        let object = Photo(entity: entity, insertInto: context)
+//        object.title = title
 //        object.url = url
-        object.title = title
-        object.url = url
-        
-        do {
-            try context.save()
-            dataPhoto.photoData.append(object)
-            print("Ooooooooooooooooooooooooooooooooo")
-        } catch let error as NSError {
-            print(error.localizedDescription)
-        }
-    }
+//
+//
+//        var selection: [String] = []
+//        let request = NSFetchRequest<NSManagedObject>(entityName: "Photo")
+//        request.returnsObjectsAsFaults = false
+//
+//        let predicate = NSPredicate(format: "title == %@", title)
+//        request.predicate = predicate
+//
+//        do {
+//            let result = try context.fetch(request)
+//            for data in result as! [Photo] {
+//                guard let object = data.value(forKey: "title") as? String else {
+////                    context.delete(data) // or however you want to handle this situation
+//                    continue
+//                }
+////                let predicate = NSPredicate(format: "url == %@", url as CVarArg)
+////                request.predicate = predicate
+//                selection.contains(object) ? context.delete(data) : selection.append(object)
+//            }
+//            print("SAVAVSVSVSVSVSVSVSV")
+//            try context.save()
+//        } catch {
+//            print("Failed")
+//        }
+////        return selection
+//    }
+    
+    
+
+//        func saveUrl(withTitle title: String, withUrl url: Data) {
+//
+//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//            let context = appDelegate.persistentContainer.viewContext
+//
+//            guard let entity = NSEntityDescription.entity(forEntityName: "Photo",
+//                                                          in: context) else { return }
+//
+//            let object = Photo(entity: entity, insertInto: context)
+//            object.title = title
+//            object.url = url
+//
+//
+//            var selection: [String] = []
+//            let request = NSFetchRequest<NSManagedObject>(entityName: "Photo")
+//            request.returnsObjectsAsFaults = false
+//
+//            let predicate = NSPredicate(format: "title == %@", title)
+//            request.predicate = predicate
+//
+//            do {
+//                let result = try context.fetch(request)
+//                for data in result as! [Photo] {
+//                    guard let object = data.value(forKey: "title") as? String else {
+//    //                    context.delete(data) // or however you want to handle this situation
+//                        continue
+//                    }
+//    //                let predicate = NSPredicate(format: "url == %@", url as CVarArg)
+//    //                request.predicate = predicate
+//                    selection.contains(object) ? context.delete(data) : selection.append(object)
+//                }
+//                print("SAVAVSVSVSVSVSVSVSV")
+//                try context.save()
+//            } catch {
+//                print("Failed")
+//            }
+//    //        return selection
+//
+//        }
     
     /*
      // MARK: - Navigation
@@ -118,6 +211,8 @@ class PhotosCollectionViewController: UICollectionViewController {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! PhotoCell
         
+        
+                        
         cell.backgroundColor = .secondarySystemBackground
         
         let item = modelOfPhoto[indexPath.item]
@@ -130,14 +225,31 @@ class PhotosCollectionViewController: UICollectionViewController {
         cell.tag = indexPath.item
         
         
+        getUrl(index: indexPath) { completion in
+            
+//            modelOfPhoto = completion
+//            for com in completion {
+            if completion[indexPath.item].title.contains(dataPhoto.dataPhoto[indexPath.item].title ?? "") {
+                    cell.checkMarkImage.isHidden = false
+                    print("TTTTAAAAAKKK")
+                } else {
+                    cell.checkMarkImage.isHidden = true
+                }
+            }
+        
+//        }
+//            if completion == false {
+//
+//                cell.checkMarkImage.isHidden = false
+//                print("QQQQQQQQ")
+//            } else {
+//                cell.checkMarkImage.isHidden = true
+//            }
+//        }
+        
         return cell
         
     }
-    
-//    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        
-//        saveUrl(withTitle: <#T##String#>, withUrl: <#T##Data#>)
-//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showFullImage" {
@@ -145,25 +257,70 @@ class PhotosCollectionViewController: UICollectionViewController {
             guard let cell = sender as? PhotoCell else { return }
             
             if segue.identifier == "showFullImage" {
-                                
+                
                 guard let indexPath = (sender as? PhotoCell)?.tag else { return }
                 
-                let url = URL(string: modelOfPhoto[indexPath].url)
-                guard let data = try? Data(contentsOf: url!) else { return }
-                
-//                var currentPhoto = currentPhotosVC.image
-//                currentPhoto = UIImage(data: data)
-//                currentPhoto
+                guard let url = URL(string: modelOfPhoto[indexPath].url) else { return }
+                guard let data = try? Data(contentsOf: url) else { return }
                 
                 currentPhotosVC.image = UIImage(data: data)
                 currentPhotosVC.text = cell.labelOfImage.text
+                                    
+                saveUrl(withTitle: currentPhotosVC.text ?? "", withUrl: data, int: Int64(modelOfPhoto[indexPath].id)) {
+                    completion in
+                    
+                    if completion == true {
+                        
+                        cell.checkMarkImage.isHidden = false
+                        print("UUUUUUUUUUU")
+                    } else {
+                        cell.checkMarkImage.isHidden = true
+                    }
+                }
+//                    cell.checkMarkImage.isHidden = false
+                    print("xxxxxxxxxx")
+                    
+//                    cell.checkMarkImage.isHidden = false
+//                    print("NNNNNNNEEEEEEEETTTTTTT")
+                    
+                }
                 
-                saveUrl(withTitle: currentPhotosVC.text!, withUrl: data)
-
             }
+        }
+    
+    func getUrl(index: IndexPath, completion: ([ModelOfPhoto]) -> Void) {
+        
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    let context = appDelegate.persistentContainer.viewContext
             
-            //            currentPhotosVC.image = cell.photoCellImage.image
-            //            currentPhotosVC.text = cell.labelOfImage.text
+//                    let fetchRequest = NSFetchRequest<Photo>(entityName: "Photo")
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Photo")
+        
+               do {
+//                if dataPhoto.dataPhoto[index.item].title == int {
+//                for x in dataPhoto.dataPhoto {
+//                    if x.title == title {
+//                         mainManagedObjectContext.deleteObject(x)
+                completion(.init())
+                            print("CHEEEEEEEEELKKKKKK")
+//                            dataPhoto.dataPhoto = try context.fetch(fetchRequest) as! [Photo]
+//                            try context.save()
+//                        } else {
+////                            dataPhoto.dataPhoto = try context.fetch(fetchRequest) as! [Photo]
+//
+//                            completion([x])
+////                            try context.save()
+//                    }
+//                     }
+//                  }
+                dataPhoto.dataPhoto = try context.fetch(fetchRequest) as! [Photo]
+                try context.save()
+               } catch {
+                   let fetchError = error as NSError
+                   print(fetchError)
+               }
+   
         }
     }
     
@@ -198,8 +355,10 @@ class PhotosCollectionViewController: UICollectionViewController {
      
      }
      */
+
+
     
-}
+
 
 extension PhotosCollectionViewController: UICollectionViewDelegateFlowLayout {
     
@@ -224,3 +383,5 @@ extension PhotosCollectionViewController: UICollectionViewDelegateFlowLayout {
     //        5
     //    }
 }
+
+

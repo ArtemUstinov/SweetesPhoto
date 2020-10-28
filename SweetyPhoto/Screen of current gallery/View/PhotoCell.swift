@@ -10,7 +10,11 @@ import UIKit
 
 class PhotoCell: UICollectionViewCell {
     
+    weak var photosColl: PhotosCollectionViewController?
+    
+    //MARK: - IBOutlets:
     @IBOutlet weak var labelOfImage: UILabel!
     @IBOutlet weak var photoCellImage: UIImageView!
+    @IBOutlet weak var checkMarkImage: UIImageView!
     
 }

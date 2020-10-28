@@ -11,35 +11,24 @@ import UIKit
 
 class CurrentPhotosViewController: UIViewController {
     
+    //MARK: - IBOutlets:
     @IBOutlet weak var currentLabel: UILabel!
     @IBOutlet weak var currentImage: UIImageView!
     
-    var currentItems = [PhotoData]()
-    
+    //MARK: - Public properties:
     var image: UIImage?
+    var checkMark: UIImage?
     var text: String?
-
+    
+    //MARK: - Override methods:
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
         currentImage.image = image
         currentLabel.text = text
     }
     
     deinit {
-        print("Delocated!!!!")
+        print("Delocated: - CurrentPhotosViewController")
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

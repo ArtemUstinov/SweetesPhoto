@@ -10,6 +10,7 @@ import UIKit
 
 class DataCell: UICollectionViewCell {
     
+    //MARK: - IBOutlets:
     @IBOutlet weak var secondDataLabel: UILabel!
     @IBOutlet weak var secondimageCell: UIImageView!
 }

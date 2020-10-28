@@ -7,6 +7,6 @@
 //
 
 struct DataPhoto {
-    var photoData: [Photo]
     
+    var dataPhoto: [Photo]
 }

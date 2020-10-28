@@ -40,11 +40,18 @@
                                             <rect key="frame" x="0.0" y="21.5" width="128" height="106.5"/>
                                             <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </imageView>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.seal" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="YZv-8R-9DQ">
+                                            <rect key="frame" x="53" y="53.5" width="22.5" height="21.5"/>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="vNK-cf-Vjv" secondAttribute="trailing" id="3dS-bL-0nF"/>
                                         <constraint firstItem="IaC-ba-mbB" firstAttribute="leading" secondItem="FdU-im-11x" secondAttribute="leading" id="JE1-Od-qoS"/>
                                         <constraint firstItem="vNK-cf-Vjv" firstAttribute="leading" secondItem="FdU-im-11x" secondAttribute="leading" id="QFn-5p-jhM"/>
+                                        <constraint firstItem="YZv-8R-9DQ" firstAttribute="centerX" secondItem="FdU-im-11x" secondAttribute="centerX" id="SYI-77-0qO"/>
+                                        <constraint firstItem="YZv-8R-9DQ" firstAttribute="centerY" secondItem="FdU-im-11x" secondAttribute="centerY" id="dFe-Os-wJz"/>
                                         <constraint firstItem="IaC-ba-mbB" firstAttribute="top" secondItem="FdU-im-11x" secondAttribute="top" id="e7y-rb-fNq"/>
                                         <constraint firstAttribute="trailing" secondItem="IaC-ba-mbB" secondAttribute="trailing" id="ghD-BF-Rhb"/>
                                         <constraint firstItem="vNK-cf-Vjv" firstAttribute="top" secondItem="IaC-ba-mbB" secondAttribute="bottom" constant="1" id="hG7-Nm-NsR"/>
@@ -52,6 +59,7 @@
                                     </constraints>
                                 </collectionViewCellContentView>
                                 <connections>
+                                    <outlet property="checkMarkImage" destination="YZv-8R-9DQ" id="kPl-t2-wMV"/>
                                     <outlet property="labelOfImage" destination="IaC-ba-mbB" id="1Wg-T9-zva"/>
                                     <outlet property="photoCellImage" destination="vNK-cf-Vjv" id="Baq-79-W1m"/>
                                     <segue destination="TwS-uM-d3M" kind="presentation" identifier="showFullImage" id="hcN-iw-mjM"/>
@@ -269,6 +277,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="checkmark.seal" catalog="system" width="128" height="122"/>
         <image name="heart.fill" catalog="system" width="128" height="109"/>
         <image name="photo.on.rectangle" catalog="system" width="128" height="98"/>
     </resources>
