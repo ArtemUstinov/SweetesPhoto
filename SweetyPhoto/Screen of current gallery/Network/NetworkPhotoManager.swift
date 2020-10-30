@@ -11,18 +11,21 @@ import Alamofire
 class NetworkPhotoManager {
     
     //MARK: - Private properties:
-    private var modelOfPhoto = [ModelOfPhoto]()
     private var url = "https://jsonplaceholder.typicode.com/photos"
     
     //MARK: - Public methods:
-    func fetchPhotos(completion: @escaping ([ModelOfPhoto]) -> Void) {
+    func fetchPhotos(completion: @escaping ([ResponsePhotoModel],Error?) -> Void) {
         let request = AF.request(url)
         request.validate()
-        request.responseDecodable(of: [ModelOfPhoto].self) { (response) in
-            guard let photo = response.value else { return }
-            self.modelOfPhoto = photo
-            print(self.modelOfPhoto)
-            completion(photo)
+        request.responseDecodable(of: [ResponsePhotoModel].self) { (response) in
+            if let error = response.error {
+                completion([],error)
+                return
+            }
+            guard let responseModel = response.value else {
+                completion([],nil)
+                return }
+            completion(responseModel,nil)
         }
     }
 }

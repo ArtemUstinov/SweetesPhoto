@@ -4,6 +4,7 @@ target 'SweetyPhoto' do
 use_frameworks!
 
 pod 'Alamofire', '~> 5.1'
+pod 'SDWebImage', '~> 5.0'
 
 end
 

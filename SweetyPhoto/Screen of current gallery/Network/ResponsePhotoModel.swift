@@ -7,7 +7,7 @@
 //
 
 
-struct NetworkData: Codable {
+struct ResponsePhotoModel: Codable {
     
     let id: Int
     let title: String
@@ -15,5 +15,4 @@ struct NetworkData: Codable {
     let thumbnailUrl: String
 }
 
-//typealias CurrentPhotoData = [PhotoData]
 

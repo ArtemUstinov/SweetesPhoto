@@ -7,26 +7,36 @@
 //
 
 import UIKit
+import CoreData
 
-class BlaViewController: UIViewController {
+class FavouritesViewController: UIViewController {
     
     //MARK: - IBOutlets:
     @IBOutlet weak var blaText: UILabel!
     @IBOutlet weak var blaImage: UIImageView!
     
-    //MARK: - Public properties:
-    var imageSec: UIImage?
-    var textSec: String?
+    
+    
+    //MARK: - Public methods:
+    var modelPhoto: Photo?
     
     //MARK: - Override methods:
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        blaImage.image = imageSec
-        blaText.text = textSec
+        let item = modelPhoto
+        setup(photoModel: item!)
+    }
+    
+    //MARK: - Private properties:
+    private func setup(photoModel: Photo) {
+        self.blaText.text = photoModel.title
+        print("TИТЛЫ ПЕРЕДАЛИСЬ!")
+        self.blaImage.image = UIImage(data: photoModel.image!)
     }
     
     deinit {
         print("BlaVC DEINIT!")
     }
 }
+
