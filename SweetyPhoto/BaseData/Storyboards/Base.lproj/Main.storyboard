@@ -71,7 +71,7 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="Sweety photo" id="huf-Sf-60P">
-                        <barButtonItem key="backBarButtonItem" title="Back" id="lG0-Qh-a5I"/>
+                        <barButtonItem key="backBarButtonItem" title="Photo" id="lG0-Qh-a5I"/>
                     </navigationItem>
                     <connections>
                         <segue destination="TwS-uM-d3M" kind="show" identifier="showCurrent" id="PMf-K2-W1w"/>
@@ -175,7 +175,9 @@
                             <outlet property="delegate" destination="lqI-hB-EUk" id="yRk-DR-Ww0"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Sweety photo" id="iHw-Iw-rf8"/>
+                    <navigationItem key="navigationItem" title="Sweety photo" id="iHw-Iw-rf8">
+                        <barButtonItem key="backBarButtonItem" title="Favourites" id="zCe-4H-6Wf"/>
+                    </navigationItem>
                     <connections>
                         <segue destination="axB-uN-Yzw" kind="show" identifier="showFavourites" id="FWF-VX-g9M"/>
                     </connections>
@@ -287,11 +289,11 @@
             </objects>
             <point key="canvasLocation" x="309" y="116"/>
         </scene>
-        <!--Favorites-->
+        <!--Favourites-->
         <scene sceneID="EE9-81-p1V">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yFI-xf-FNp" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Favorites" image="heart.fill" catalog="system" id="xHC-29-6jE"/>
+                    <tabBarItem key="tabBarItem" title="Favourites" image="heart.fill" catalog="system" id="xHC-29-6jE"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Tju-la-2Yt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

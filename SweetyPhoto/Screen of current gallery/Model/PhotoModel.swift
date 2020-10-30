@@ -22,11 +22,11 @@ class PhotoModel: ProtocolPhotoCell {
     }
     
     convenience init?(responseModel: ResponsePhotoModel) {
-        guard let url = URL(string: responseModel.thumbnailUrl), let bigUrl = URL(string: responseModel.url) else {
-            return nil
+        guard let url = URL(string: responseModel.thumbnailUrl),
+            let bigUrl = URL(string: responseModel.url) else {
+                return nil
         }
         self.init(urlBig: bigUrl, url: url , title: responseModel.title)
     }
-    
 }
 

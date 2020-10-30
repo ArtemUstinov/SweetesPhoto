@@ -17,36 +17,28 @@ class FavouritesCollectionViewController: UICollectionViewController {
     var selectedItem: Photo?
     
     //MARK: - Override methods:
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
-    
-  
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        collectionView.reloadData()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         getCoreDataResult()
-        
         DispatchQueue.main.async {
             self.collectionView.reloadData()
         }
     }
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView,
+                                 numberOfItemsInSection section: Int) -> Int {
         
         savedPhoto.count
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dataCell", for: indexPath) as! FavouritesCell
+    override func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "dataCell",
+            for: indexPath) as! FavouritesCell
         
         let item = savedPhoto[indexPath.item]
         cell.setup(photoModel: item)
@@ -54,7 +46,8 @@ class FavouritesCollectionViewController: UICollectionViewController {
         return cell
     }
     
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    override func collectionView(_ collectionView: UICollectionView,
+                                 didSelectItemAt indexPath: IndexPath) {
         
         self.selectedItem = savedPhoto[indexPath.item]
         performSegue(withIdentifier: "showFavourites", sender: nil)
@@ -69,9 +62,12 @@ class FavouritesCollectionViewController: UICollectionViewController {
     
     //MARK: - IBActions:
     @IBAction func unwindSegue(segue: UIStoryboardSegue) {
+        
+        guard let selectedItem = selectedItem else { return }
+        
         let context = CoreDataManager.shared.context
         do {
-            context.delete(selectedItem!)
+            context.delete(selectedItem)
             try context.save()
         } catch let error as NSError {
             print(error.localizedDescription)
@@ -96,7 +92,10 @@ class FavouritesCollectionViewController: UICollectionViewController {
 
 extension FavouritesCollectionViewController: UICollectionViewDelegateFlowLayout {
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
         let itemsPerRow: CGFloat = 4
         let paddingWidth = 13 * (itemsPerRow + 1)
         let availableWidth = collectionView.frame.width - paddingWidth
@@ -105,7 +104,9 @@ extension FavouritesCollectionViewController: UICollectionViewDelegateFlowLayout
         return CGSize(width: widthPerItem, height: widthPerItem)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        
         UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
     }
 }

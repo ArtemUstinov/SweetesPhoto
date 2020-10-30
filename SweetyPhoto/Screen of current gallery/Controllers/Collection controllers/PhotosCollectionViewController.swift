@@ -15,7 +15,6 @@ class PhotosCollectionViewController: UICollectionViewController {
     
     //MARK: - Private properties:
     private let networkPhotoManager = NetworkPhotoManager()
-    //    let coreDataManager = CoreDataManager.shared
     private var photos: [PhotoModel] = [PhotoModel]()
     private var savedPhoto: [Photo] = [Photo]()
     private var selectedItem: PhotoModel?
@@ -34,15 +33,19 @@ class PhotosCollectionViewController: UICollectionViewController {
         collectionView.reloadData()
     }
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView,
+                                 numberOfItemsInSection section: Int) -> Int {
         
         photos.count
-        
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    override func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! PhotoCell
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "photoCell",
+            for: indexPath) as! PhotoCell
         
         let item = photos[indexPath.item]
         cell.setup(photoModel: item)
@@ -57,12 +60,13 @@ class PhotosCollectionViewController: UICollectionViewController {
         destination.modelPhoto = selectedItem
     }
     
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    override func collectionView(_ collectionView: UICollectionView,
+                                 didSelectItemAt indexPath: IndexPath) {
         
         self.selectedItem = photos[indexPath.item]
         performSegue(withIdentifier: "showCurrent", sender: nil)
     }
-
+    
     //MARK: - Private methods:
     private func getCoreDataResult() {
         
@@ -107,7 +111,10 @@ class PhotosCollectionViewController: UICollectionViewController {
 
 extension PhotosCollectionViewController: UICollectionViewDelegateFlowLayout {
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
         let itemsPerRow: CGFloat = 4
         let paddingWidth = 13 * (itemsPerRow + 1)
         let availableWidth = collectionView.frame.width - paddingWidth
@@ -116,17 +123,11 @@ extension PhotosCollectionViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: widthPerItem, height: widthPerItem)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        
         UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
     }
-    
-    //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    //        16
-    //    }
-    //
-    //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-    //        5
-    //    }
 }
 
 

@@ -29,24 +29,31 @@ class CurrentPhotosViewController: UIViewController {
     //MARK: - Public methods:
     func setup(modelPhoto: PhotoModel) {
         currentLabel.text = modelPhoto.title
+        
         if modelPhoto.localObject != nil {
-            guard let data = modelPhoto.localObject?.image, let image = UIImage(data: data) else { return }
+            guard let data = modelPhoto.localObject?.image,
+                let image = UIImage(data: data) else { return }
             currentImage.image = image
-            print("из памяти")
+            print("From memory")
+            
         } else {
-            currentImage.sd_setImage(with: modelPhoto.urlBig) { (image, error, _, url) in
+            currentImage.sd_setImage(with: modelPhoto.urlBig) {
+                (image, error, _, url) in
                 guard error == nil, image != nil, url != nil else { return }
                 
                 let context = CoreDataManager.shared.context
-                guard let entity = NSEntityDescription.entity(forEntityName: "Photo", in: context) else { return }
-                let obj = NSManagedObject(entity: entity, insertInto: context)
+                guard let entity = NSEntityDescription.entity(
+                    forEntityName: "Photo",
+                    in: context) else { return }
                 
-                let photo = obj as! Photo
+                let object = NSManagedObject(entity: entity, insertInto: context)
+                
+                let photo = object as! Photo
                 photo.image = image!.pngData()
                 photo.title = modelPhoto.title
                 photo.url = url!.absoluteString
                 modelPhoto.localObject = photo
-                print("из интернета")
+                print("From internet")
                 
                 do {
                     try context.save()

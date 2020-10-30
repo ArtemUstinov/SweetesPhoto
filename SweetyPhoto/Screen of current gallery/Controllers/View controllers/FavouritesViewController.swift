@@ -31,12 +31,11 @@ class FavouritesViewController: UIViewController {
     //MARK: - Private properties:
     private func setup(photoModel: Photo) {
         self.blaText.text = photoModel.title
-        print("TИТЛЫ ПЕРЕДАЛИСЬ!")
         self.blaImage.image = UIImage(data: photoModel.image!)
     }
     
     deinit {
-        print("BlaVC DEINIT!")
+        print("Delocated: - FavouritesViewController")
     }
 }
 
